@@ -15,12 +15,16 @@ Including another URLconf
 """
 
 from wxcloudrun import views
-from django.conf.urls import url
+from django.urls import path
 
-urlpatterns = (
+urlpatterns = [
     # 计数器接口
-    url(r'^^api/count(/)?$', views.counter),
+    path('api/count', views.counter),
+    
+    # 微信API接口
+    path('api/wechat/auth_url', views.get_wechat_auth_url, name='wechat_auth_url'),
+    path('api/wechat/user_info', views.get_wechat_user_info, name='wechat_user_info'),
 
     # 获取主页
-    url(r'(/)?$', views.index),
-)
+    path('', views.index),
+]
